@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -12,29 +12,24 @@ function App() {
     setUrl(`https://robohash.org/${text}.png`);
   };
 
-  async function fetchData() {
+  const handleFetchData = async function () {
+    setModal(true);
+    setLoading(true);
+
     try {
       const response = await fetch(
-        "https://official-joke-api.appspot.com/jokes/random",
-        {
-          mode: "no-cors",
-        }
+        "https://official-joke-api.appspot.com/jokes/random"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
-      setJoke(data);
+      const result = await response.json();
+      setJoke(result);
       console.log(joke.setup);
     } catch (error) {
       console.error("Error:", error);
     }
-  }
 
-  const handleFetchData = () => {
-    setLoading(true);
-    setModal(true);
-    fetchData();
     setLoading(false);
   };
 
@@ -90,7 +85,7 @@ function App() {
                 <div className="flex items-center justify-center mt-6">
                   <button
                     className="bg-red-600 px-4 py-2 rounded-md text-white"
-                    onClick={fetchData}
+                    onClick={handleFetchData}
                   >
                     Reload
                   </button>
