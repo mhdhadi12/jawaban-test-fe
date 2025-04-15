@@ -1,5 +1,11 @@
+import UserProfileForm from "../components/user-profile-form";
+
 const Task5 = () => {
-  return <h1>Task5</h1>;
+  return (
+    <>
+      <UserProfileForm />
+    </>
+  );
 };
 
 export default Task5;
